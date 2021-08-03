@@ -284,9 +284,13 @@
 		header.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
 	}
 	function notify() {
-		alert( "swipe test" );
+		alert( "swipeleft" );
 	}
-	$('.desc').on('touchstart touchmove touchend' , notify);
+	function notify2() {
+		alert( "swiperight" );
+	}
+	$('.desc').on('swipeleft' , notify);
+	$('.desc').on('swiperight' , notify2);
 
 
 
@@ -308,12 +312,7 @@
 		$('.my-card:nth-child(' + $odd + ')').prev().addClass('prev');
 		$('.my-card:nth-child(' + $odd + ')').next().addClass('next');
 	}
-	$(document).on("pagecreate","#deneme",function(){
-		$('.desc').on("tap",function(){
-			alert("vay anasını");
-		});
-	});
-	
+
 	$('.my-card').click(function() {
 		$slide = $('.my-card.active').width();$slide = 0;
 		$cicleindex=$('.navigator li.active').data("index");
