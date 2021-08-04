@@ -146,13 +146,13 @@
 		<div>BASINDA</div>
 		<div class="we">Biz</div>
 	</div>
-	<div class="card-carousel" id="deneme">
+	<div class="card-carousel">
 		<div class="my-card">
 			<div class="press">
 				<div class="presstop">
 					<img src="src/sabah.png">
 					<div>
-						<h2>SABAH</h2>
+						<h2>SABAH 1</h2>
 						<span>Savunma da büyük atılım</span>
 					</div>
 				</div>
@@ -164,7 +164,7 @@
 				<div class="presstop">
 					<img src="src/sabah.png">
 					<div>
-						<h2>SABAH</h2>
+						<h2>SABAH 2</h2>
 						<span>Savunma da büyük atılım</span>
 					</div>
 				</div>
@@ -176,7 +176,7 @@
 				<div class="presstop">
 					<img src="src/sabah.png">
 					<div>
-						<h2>SABAH</h2>
+						<h2>SABAH 3</h2>
 						<span>Savunma da büyük atılım</span>
 					</div>
 				</div>
@@ -188,7 +188,7 @@
 				<div class="presstop">
 					<img src="src/sabah.png">
 					<div>
-						<h2>SABAH</h2>
+						<h2>SABAH 4</h2>
 						<span>Savunma da büyük atılım</span>
 					</div>
 				</div>
@@ -248,12 +248,9 @@
 					<a href="#"><i class="fa fa-linkedin"></i></a>
 					<a href="#"><i class="fa fa-twitter"></i></a>
 					<a href="#"><i class="fa fa-instagram"></i></a>
-
 				</div>
 			</div>
-
 		</div>
-
 		<div class="b-footer clear">
 			<p>Copyright 2021 | Sitemizde yer alan görseller ve içerik ADF Mühendislik Ltd. Şti.'ne aittir. Tüm hakları saklıdır. </p>
 		</div>
@@ -261,6 +258,7 @@
 </body>
 <script src="src/header.js"></script>
 <script src="src/jquery.js"></script> 
+<script src="src/jquerytouch.js"></script>
 <script>
 
 
@@ -283,14 +281,6 @@
 		}
 		header.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
 	}
-	function notify() {
-		alert( "swipeleft" );
-	}
-	function notify2() {
-		alert( "swiperight" );
-	}
-	$('.desc').on('swipeleft' , notify);
-	$('.desc').on('swiperight' , notify2);
 
 
 
@@ -313,6 +303,12 @@
 		$('.my-card:nth-child(' + $odd + ')').next().addClass('next');
 	}
 
+	$('.my-card').on('swipeleft' , function(){
+		$('.active').next().trigger('click');
+	});
+	$('.my-card').on('swiperight' , function(){
+		$('.active').prev().trigger('click');
+	});
 	$('.my-card').click(function() {
 		$slide = $('.my-card.active').width();$slide = 0;
 		$cicleindex=$('.navigator li.active').data("index");
@@ -332,47 +328,6 @@
 		$(this).prev().addClass('prev');
 		$(this).next().addClass('next');
 	});
-
-	function dragStart (e) {
-		e = e || window.event;
-		e.preventDefault();
-		posInitial = items.offsetLeft;
-
-		if (e.type == 'touchstart') {
-			posX1 = e.touches[0].clientX;
-		} else {
-			posX1 = e.clientX;
-			document.onmouseup = dragEnd;
-			document.onmousemove = dragAction;
-		}
-	}
-
-	function dragAction (e) {
-		e = e || window.event;
-
-		if (e.type == 'touchmove') {
-			posX2 = posX1 - e.touches[0].clientX;
-			posX1 = e.touches[0].clientX;
-		} else {
-			posX2 = posX1 - e.clientX;
-			posX1 = e.clientX;
-		}
-		items.style.left = (items.offsetLeft - posX2) + "px";
-	}
-
-	function dragEnd (e) {
-		posFinal = items.offsetLeft;
-		if (posFinal - posInitial < -threshold) {
-			shiftSlide(1, 'drag');
-		} else if (posFinal - posInitial > threshold) {
-			shiftSlide(-1, 'drag');
-		} else {
-			items.style.left = (posInitial) + "px";
-		}
-
-		document.onmouseup = null;
-		document.onmousemove = null;
-	}
 
 	$('.navigator li').click(function(){
 		//alert($(this).data("index"));

@@ -464,8 +464,8 @@ nav .search-icon{
 }
 @media screen and (min-width: 1300px) {
   .thirtyper figure.reviewproduct figcaption {
-  top: 0%;
-}
+    top: 0%;
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -555,6 +555,11 @@ nav .search-icon{
 .card-carousel .my-card.prev .press, .card-carousel .my-card.next .press {
   opacity: 0.1;
 }
+@media (max-width: 740px){
+  .card-carousel .my-card.active {width: auto;margin: 40px;margin-bottom: 0;}
+  .card-carousel .my-card.prev, .card-carousel .my-card.next {display: none}
+
+}
 .navigator { 
   position: relative; left: 50%;
   -webkit-transform: translateX(-50%);
@@ -572,6 +577,7 @@ nav .search-icon{
   padding: 18px;
   font-family: Verdana;
   color: #2d2c2b;
+  user-select: none;
 }
 .presstop{
   display: flex;
@@ -644,13 +650,9 @@ h2 {
 .footer div {
   border-right: solid white;
   border-right-width: 2px;
-  margin: 0px 30px;
+  margin: 0px 30px 0 0;
 }
-.r-footer {
-  display: flex;
-  flex-flow: column wrap;
-  margin-top: 0px;
-}
+
 
 .r-footer > * {
   flex: 1 50%;
@@ -665,6 +667,7 @@ h2 {
 .b-footer {
   text-align: center;
   color: #999; 
+  font-size: 13px;
 }
 .l-footer div{
   display: flex;
@@ -685,19 +688,34 @@ h2 {
   border: none;
   margin: 0px;
 }
+@media screen and (max-width: 940px) {
+  .footer {
+    flex-flow: column wrap;
+  }
+  .l-footer{
+    border: 0 !important;
+  }
+  .o-footer{
+    border: 0 !important;
+  }
+}
 @media screen and (min-width: 600px) {
+  .r-footer {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 0px;
+    flex: 2 0px;
+  }
   .r-footer > * {
     flex: 1;
   }
-
 
   .l-footer {
     flex: 1 0px;
     padding-right: 70px;
   }
-
-  .r-footer {
-    flex: 2 0px;
+  .mail-input {
+    margin: 0px 30px !important;
   }
 }
 @media screen and (max-width: 600px) {
@@ -708,12 +726,27 @@ h2 {
     list-style: none;
     margin-left: 30px;
   }
+  .mailarea{
+    flex-direction: column;
+    text-align: left;
+    margin-left: 30px !important;
+  }
+  .mailarea div{
+    margin-bottom: 10px !important;
+  }
+  .mail-input {
+    margin: 0px !important;
+  }
+  .o-footer{
+    margin-left: 30px !important;
+  }
+  .r-footer {
+    display: block;
+  }
 }
 
 
-.mail-input {
-  margin: 0px 30px !important;
-}
+
 .mail-input input{
   border-style: none;
   border-top-style: none;
@@ -760,7 +793,7 @@ h2 {
   position: absolute;
   width: 100%;
   font-size: 1.3em;
-  margin-top: -4%;
+  margin-top: -65px;
   color: #da0022;
 }
 
