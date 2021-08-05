@@ -12,7 +12,7 @@
 	<header class="sticky">
 		<nav> 
 			<div class="menu-icon">
-				<span class="fas fa-bars"></span>
+				<span class="fa fa-bars"></span>
 			</div>
 			<a href="index.html"><span class="logo">adf</span></a>
 			<div class="nav-items">
@@ -40,7 +40,7 @@
 			</div>
 
 			<div class="cancel-icon">
-				<span class="fas fa-times"></span>
+				<span class="fa fa-times"></span>
 			</div>
 
 			<form action="#">
@@ -61,7 +61,7 @@
 
 		<div class="video-container">
 			<div class="color-overlay"></div>
-			<video autoplay loop muted>
+			<video loop muted>
 				<source src="src/video.mp4" type="video/mp4"></source>
 			</video>
 		</div>
@@ -256,13 +256,60 @@
 		</div>
 	</footer>
 </body>
-<script src="src/header.js"></script>
 <script src="src/jquery.js"></script> 
 <script src="src/jquerytouch.js"></script>
 <script>
+	var video = document.querySelector('video');
+	video.muted = true;
+	video.play();// Bazı tarayıcılar otomatik çalıştırmıyor.
+	const menuBtn = document.querySelector(".menu-icon span");
+	const searchBtn = document.querySelector(".search-icon");
+	const cancelBtn = document.querySelector(".cancel-icon");
+	const items = document.querySelector(".nav-items");
+	const form = document.querySelector("form");
+	var menuopen=false;
+	menuBtn.onclick = ()=>{
+		items.classList.add("active");
+		menuBtn.classList.add("hide");
+		searchBtn.classList.add("hide");
+		cancelBtn.classList.add("show");
+		var header = document.getElementsByTagName("header")[0];
+		var navitems = document.getElementsByClassName("nav-items active")[0];
+		var oran =.95;
+		menuopen=true;
+		header.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
+		navitems.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
 
-
-
+	}
+	cancelBtn.onclick = ()=>{
+		var navitems = document.getElementsByClassName("nav-items active")[0];
+		navitems.style.background="";
+		items.classList.remove("active");
+		menuBtn.classList.remove("hide");
+		cancelBtn.classList.remove("show");
+		form.classList.remove("active"); 
+		menuopen=false
+		myFunction();
+	}
+	searchBtn.onclick = ()=>{
+		form.classList.add("active");
+		searchBtn.classList.add("hide");
+		cancelBtn.classList.add("show");
+	}
+	function cleanLang() {
+		const span = document.querySelectorAll(".nav-wrapper span");
+		span.forEach(function(userItem) {
+			userItem.classList.remove("active");
+		});
+	}
+	const span = document.querySelectorAll(".nav-wrapper span");
+	span.forEach(function(userItem) {
+		userItem.onclick = ()=>{
+			cleanLang();
+			document.querySelector(".nav-wrapper b").innerHTML=userItem.innerHTML+' <i class="fa fa-angle-down" aria-hidden="true"></i>';
+			userItem.classList.add("active");
+		}
+	});
 	var list = document.querySelectorAll("div[data-img]");
 
 	for (var i = 0; i < list.length; i++) {
@@ -279,12 +326,10 @@
 		var oran =  window.pageYOffset/(video.offsetHeight-70);
 		if (oran>1) {oran=1
 		}
-		header.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
+		if (!menuopen) {
+			header.style.background="linear-gradient(to right, rgba(43, 42, 41, "+oran+") 0%, rgba(43, 41, 51, "+oran+") 40%, rgba(44, 38, 68, "+oran+") 100%)";
+		}
 	}
-
-
-
-
 	$num = $('.my-card').length;
 	$even = $num / 2;
 	$odd = ($num + 1) / 2;
@@ -331,7 +376,6 @@
 
 	$('.navigator li').click(function(){
 		//alert($(this).data("index"));
-
 	});
 	$('html body').keydown(function(e) {
 		if (e.keyCode == 37) { 
